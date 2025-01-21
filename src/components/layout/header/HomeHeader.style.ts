@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const HeaderStyle = styled.header`
+export const HomeHeader = styled.header`
   background: linear-gradient(
     to right,
     ${({ theme }) => theme.color.rgb1},
@@ -12,4 +12,26 @@ export const HeaderStyle = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const HeaderWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1200px;
+  height: 100%;
+
+  .logo {
+    padding-left: 10px;
+  }
+
+  .profile {
+    padding-right: 10px;
+  }
+`;
+
+export const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;

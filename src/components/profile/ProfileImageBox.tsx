@@ -1,3 +1,4 @@
+import React from 'react';
 import * as S from './ProfileImageBox.style';
 import penguin from './penguin.jpeg';
 

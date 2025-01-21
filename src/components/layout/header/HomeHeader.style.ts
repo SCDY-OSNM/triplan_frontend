@@ -6,7 +6,7 @@ export const HomeHeader = styled.header`
     ${({ theme }) => theme.color.rgb1},
     ${({ theme }) => theme.color.rgb2}
   );
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 100px;
   display: flex;
@@ -23,6 +23,10 @@ export const HeaderWrapper = styled.div`
 
   .logo {
     padding-left: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .profile {
@@ -30,7 +34,7 @@ export const HeaderWrapper = styled.div`
   }
 `;
 
-export const LogoWrapper = styled.div`
+export const LogoSearchWrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;

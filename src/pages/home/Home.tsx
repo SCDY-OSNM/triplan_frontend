@@ -1,12 +1,7 @@
-import * as S from './Home.style'
-import HomeHeader from '@/components/layout/header/HomeHeader';
+import * as S from './Home.style';
 
 const Home = () => {
-  return (
-    <S.HomeStyle>
-      <HomeHeader />
-    </S.HomeStyle>
-  );
+  return <S.HomeStyle>HomePage</S.HomeStyle>;
 };
 
 export default Home;

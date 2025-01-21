@@ -23,7 +23,7 @@ export const SearchContainer = styled.div`
     font-size: 24px;
     background: transparent;
     flex: 1px;
-    color: ${({ theme }) => theme.color.bk};
+    color: ${({ theme }) => theme.color.bkTitle};
     margin: 5px;
 
     &::placeholder {

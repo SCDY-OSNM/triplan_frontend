@@ -4,7 +4,7 @@ import { IoClose } from 'react-icons/io5';
 import React, { useState } from 'react';
 
 interface SearchProps {
-  onSearchChange: (search: string) => void;
+  onSearchChange?: (search: string) => void;
 }
 
 const Search = ({ onSearchChange }: SearchProps) => {

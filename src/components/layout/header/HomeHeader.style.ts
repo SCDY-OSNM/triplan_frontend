@@ -20,17 +20,12 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   width: 1200px;
   height: 100%;
+  padding: 0 10px;
 
   .logo {
-    padding-left: 10px;
-
     &:hover {
       cursor: pointer;
     }
-  }
-
-  .profile {
-    padding-right: 10px;
   }
 `;
 

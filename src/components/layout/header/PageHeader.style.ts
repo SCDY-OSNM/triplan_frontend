@@ -20,15 +20,12 @@ export const PageHeaderWrapper = styled.div<PageHeaderWrapperProps>`
   justify-content: space-between;
   width: ${({ isNarrow }) => (isNarrow ? '100%' : '1200px')};
   height: 100%;
+  padding: 0 10px;
 
   .logo {
     &:hover {
       cursor: pointer;
     }
-  }
-
-  .profile {
-    padding-right: 10px;
   }
 `;
 
@@ -38,7 +35,6 @@ export const SideMenu = styled.div`
   justify-content: center;
   width: 50px;
   height: 50px;
-  padding-left: 10px;
   font-size: 50px;
   color: ${({ theme }) => theme.color.bkTitle};
 `;

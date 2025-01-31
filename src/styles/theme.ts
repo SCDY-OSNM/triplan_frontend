@@ -13,7 +13,9 @@ export type ColorKey =
   | 'yellow'
   | 'blue'
   | 'green'
-  | 'orange';
+  | 'orange'
+  | 'loading'
+  | 'star';
 
 interface DefaultTheme {
   color: Record<ColorKey, string>;
@@ -36,5 +38,7 @@ export const theme: DefaultTheme = {
     blue: '#008CFF',
     green: '#00AF00',
     orange: '#FF5E00',
+    loading: '#D9D9D9',
+    star: '#FFC107',
   },
 };

@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 import { FaStar } from 'react-icons/fa';
 
-export const HomeStayContentsStyle = styled.div`
+export const HomeStayContentsStyle = styled.article`
   display: flex;
   flex-direction: column;
   width: 375px;
   gap: 10px;
+`;
+
+export const IContents = styled.div`
+  width: 375px;
+  height: 235px;
 `;
 
 interface ImageProps {
@@ -13,17 +18,17 @@ interface ImageProps {
 }
 
 export const Image = styled.img<ImageProps>`
-  width: 375px;
-  height: 235px;
+  width: 100%;
+  height: 100%;
   object-fit: ${({ $isDefaultImage }) => ($isDefaultImage ? 'contain' : 'cover')};
   background-color: ${({ theme }) => theme.color.loading};
   border-radius: 15px;
 `;
 
-export const Content = styled.div`
+export const TContents = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 0 5px;
   gap: 12px;
 `;
 
@@ -31,6 +36,7 @@ export const TextContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 100%;
 `;
 
 export const HeartWrapper = styled.div`
@@ -43,16 +49,21 @@ export const TTWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
+  width: 90%;
 `;
-export const Type = styled.div`
+export const Type = styled.span`
   font-size: 16px;
   color: ${({ theme }) => theme.color.darkGray};
 `;
 
-export const Title = styled.div`
+export const Title = styled.h3`
   font-size: 24px;
   font-weight: bold;
   color: ${({ theme }) => theme.color.bkTitle};
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const LocationWrapper = styled.div`
@@ -66,7 +77,7 @@ export const Dot = styled.span`
   color: ${({ theme }) => theme.color.gray};
 `;
 
-export const Location = styled.div`
+export const Location = styled.span`
   font-size: 16px;
   color: ${({ theme }) => theme.color.darkGray};
 `;
@@ -88,13 +99,13 @@ export const StarIcon = styled(FaStar)`
   color: ${({ theme }) => theme.color.star};
 `;
 
-export const SRating = styled.div`
+export const SRating = styled.span`
   font-size: 12px;
   font-weight: bold;
   color: ${({ theme }) => theme.color.bkTitle};
 `;
 
-export const SCount = styled.div`
+export const SCount = styled.span`
   font-size: 12px;
   color: ${({ theme }) => theme.color.darkGray};
 `;
@@ -105,7 +116,7 @@ export const CPWrapper = styled.div`
   gap: 4px;
 `;
 
-export const Coupon = styled.div`
+export const Coupon = styled.span`
   font-size: 12px;
   color: ${({ theme }) => theme.color.gray};
   // 쿠폰 없을 경우
@@ -121,7 +132,7 @@ export const PriceWrapper = styled.div`
   //color: transparent;
 `;
 
-export const DiscountRate = styled.div`
+export const DiscountRate = styled.span`
   display: flex;
   flex-direction: row;
   font-size: 20px;
@@ -136,7 +147,7 @@ export const DiscountRate = styled.div`
   }
 `;
 
-export const PayPrice = styled.div`
+export const PayPrice = styled.span`
   display: flex;
   flex-direction: row;
   align-items: end;
@@ -150,7 +161,7 @@ export const PayPrice = styled.div`
   }
 `;
 
-export const Price = styled.div`
+export const Price = styled.span`
   display: flex;
   flex-direction: row;
   align-items: end;

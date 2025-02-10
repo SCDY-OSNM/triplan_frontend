@@ -20,7 +20,6 @@ export const HeaderWrapper = styled.div`
   justify-content: space-between;
   width: 1200px;
   height: 100%;
-  padding: 0 10px;
 
   .logo {
     &:hover {

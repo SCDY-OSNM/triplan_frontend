@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { GoHeartFill } from 'react-icons/go';
 
-export const LikesStyle = styled.div<{
+export const LikesStyle = styled.button<{
   width: string;
   height: string;
 }>`
@@ -12,6 +12,7 @@ export const LikesStyle = styled.div<{
   height: ${({ height }) => height};
   background-color: ${({ theme }) => theme.color.heartBg};
   border-radius: 50%;
+  border: none;
 `;
 
 export const HeartIcon = styled(GoHeartFill)<{ liked: boolean }>`

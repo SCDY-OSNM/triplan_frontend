@@ -20,7 +20,6 @@ export const PageHeaderWrapper = styled.div<PageHeaderWrapperProps>`
   justify-content: space-between;
   width: ${({ isNarrow }) => (isNarrow ? '100%' : '1200px')};
   height: 100%;
-  padding: 0 10px;
 
   .logo {
     &:hover {

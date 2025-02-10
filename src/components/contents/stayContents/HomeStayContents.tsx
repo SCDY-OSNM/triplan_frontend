@@ -1,11 +1,11 @@
 import * as S from './HomeStayContents.style';
 import Likes from '@/components/likes/Likes';
 import { useEffect, useState } from 'react';
-import defaultImg from '../../../../public/error.png';
+import axios from 'axios';
 
 const HomeStayContents = () => {
   const [imgError, setImgError] = useState(false);
-  const [imgSrc, setImgSrc] = useState('');
+  const [imgUrl, setImgUrl] = useState('');
 
   const handleImgError = () => {
     setImgError(true);
@@ -16,11 +16,10 @@ const HomeStayContents = () => {
     const fetchImage = async () => {
       try {
         // API 엔드포인트
-        const response = await fetch('');
-        const data = await response.json();
-        setImgSrc(data.imageUrl);
+        const response = await axios.get('');
+        setImgUrl(response.data.imageUrl);
       } catch (error) {
-        console.error('이미지 URL을 가져오는 중 오류 발생:', error);
+        console.error('이미지 URL을 가져오는 중 오류 발생 Home 숙박:', error);
       }
     };
 
@@ -33,18 +32,20 @@ const HomeStayContents = () => {
 
   return (
     <S.HomeStayContentsStyle>
-      <S.Image
-        src={imgError ? defaultImg : imgSrc}
-        onError={handleImgError}
-        alt="숙소 이미지"
-        $isDefaultImage={imgError}
-      />
-      <S.Content>
+      <S.IContents>
+        <S.Image
+          src={imgError ? './errImg.png' : imgUrl}
+          onError={handleImgError}
+          alt="숙소 이미지"
+          $isDefaultImage={imgError}
+        />
+      </S.IContents>
+      <S.TContents>
         <S.TextContent>
           <S.HeartWrapper>
             <S.TTWrapper>
               <S.Type>펜션 (숙소-타입)</S.Type>
-              <S.Title>태안 청포대 수펜션 (숙소 이름)</S.Title>
+              <S.Title>태안 청포대 수펜션 (숙소 이름) 어쩌구 저쩌구</S.Title>
             </S.TTWrapper>
             <Likes />
           </S.HeartWrapper>
@@ -76,7 +77,7 @@ const HomeStayContents = () => {
             </S.Price>
           </S.PriceWrapper>
         </S.CPWrapper>
-      </S.Content>
+      </S.TContents>
     </S.HomeStayContentsStyle>
   );
 };

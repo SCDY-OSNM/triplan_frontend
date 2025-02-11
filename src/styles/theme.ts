@@ -2,6 +2,7 @@ export type ColorKey =
   | 'rgb1'
   | 'rgb2'
   | 'point'
+  | 'title'
   | 'bkTitle'
   | 'bkBody'
   | 'darkGray'
@@ -26,6 +27,7 @@ export const theme: DefaultTheme = {
     rgb1: '#7E8CFF',
     rgb2: '#90DAF7',
     point: '#7A89FA',
+    title: '#222222',
     bkTitle: '#303030',
     bkBody: '#484848',
     darkGray: '#7A7A7A',

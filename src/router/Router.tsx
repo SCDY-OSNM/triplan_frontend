@@ -16,6 +16,7 @@ import Leisure from '@/pages/leisure/Leisure';
 import Transportation from '@/pages/transportation/Transportation';
 import Chat from '@/pages/chat/Chat';
 import Order from '@/pages/order/Order';
+import Travelog from '@/pages/travelog/Travelog';
 
 export default function Router() {
   return (
@@ -36,6 +37,7 @@ export default function Router() {
       <Route path="/transportation" element={<Transportation />} />
       <Route path="/chat" element={<Chat />} />
       <Route path="/order" element={<Order />} />
+      <Route path="/travelog" element={<Travelog />} />
     </Routes>
   );
 }

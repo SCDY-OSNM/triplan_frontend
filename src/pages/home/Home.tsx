@@ -5,12 +5,14 @@ import HomePopularityTravels from '@/components/contents/popularityTravels/HomeP
 import TravelogContents from '@/components/contents/travelogContents/TravelogContents';
 import { useNavigate } from 'react-router';
 import { TMWrapper } from './Home.style';
+import Navbar from '@/components/layout/navbar/Navbar';
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <S.HomeStyle>
+      <Navbar />
       <S.ContentsWrapper role="region" aria-label="국내 인기 여행지">
         <S.Title>🔥인기 급상승 국내 여행지 Best 10🔥</S.Title>
         <HomePopularityTravels />

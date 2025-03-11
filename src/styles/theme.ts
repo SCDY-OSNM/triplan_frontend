@@ -16,10 +16,14 @@ export type ColorKey =
   | 'green'
   | 'orange'
   | 'loading'
-  | 'star';
+  | 'star'
+  | 'footer';
+
+export type Shadows = string;
 
 interface DefaultTheme {
   color: Record<ColorKey, string>;
+  shadow: Record<Shadows, string>;
 }
 
 export const theme: DefaultTheme = {
@@ -42,5 +46,12 @@ export const theme: DefaultTheme = {
     orange: '#FF5E00',
     loading: '#D9D9D9',
     star: '#FFC107',
+    footer: '#F7F6F6',
+  },
+
+  shadow: {
+    boxShadow: '0 0 20px rgba(0, 0, 0, 0.1)',
+    bottom: '0 1px 10px rgba(0, 0, 0, 0.1)',
+    rb: '0 4px 8px rgba(0, 0, 0, 0.1)',
   },
 };

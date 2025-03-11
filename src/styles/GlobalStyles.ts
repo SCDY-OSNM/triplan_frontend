@@ -21,6 +21,10 @@ const GlobalStyles = createGlobalStyle`
         font-family: "Noto Sans KR", sans-serif;
     }
     
+    button {
+        all: unset;
+    }
+    
     .number, .percentage {
         font-family: "Roboto", sans-serif;
     }

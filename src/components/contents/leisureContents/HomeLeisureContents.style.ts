@@ -5,6 +5,7 @@ export const HomeLeisureContentsStyle = styled.article`
   flex-direction: column;
   width: 380px;
   gap: 15px;
+  cursor: pointer;
 `;
 
 export const IContents = styled.div`

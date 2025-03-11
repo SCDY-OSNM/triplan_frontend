@@ -105,6 +105,7 @@ export const ContentBtn = styled.button`
     font-size: 18px;
     font-weight: bold;
     color: ${({ theme }) => theme.color.bkTitle};
+    cursor: pointer;
   }
 `;
 

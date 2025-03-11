@@ -45,6 +45,7 @@ export const SidebarBtn = styled.button`
   border-radius: 20px;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   color: ${({ theme }) => theme.color.bkTitle};
+  cursor: pointer;
 `;
 
 export const ButtonWrapper = styled.button`
@@ -53,6 +54,7 @@ export const ButtonWrapper = styled.button`
   justify-content: center;
   align-items: center;
   gap: 20px;
+  cursor: pointer;
 `;
 
 export const NavIcon = styled.span`

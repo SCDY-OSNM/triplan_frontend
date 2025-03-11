@@ -5,6 +5,7 @@ export const TravelogContentsStyle = styled.article`
   flex-direction: column;
   width: 580px;
   gap: 20px;
+  cursor: pointer;
 `;
 
 export const TopContents = styled.div`

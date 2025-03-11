@@ -32,4 +32,5 @@ export const More = styled.button`
   border: none;
   background-color: inherit;
   align-items: end;
+  cursor: pointer;
 `;

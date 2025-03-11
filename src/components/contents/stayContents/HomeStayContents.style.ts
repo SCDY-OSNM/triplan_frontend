@@ -6,6 +6,7 @@ export const HomeStayContentsStyle = styled.article`
   flex-direction: column;
   width: 375px;
   gap: 10px;
+  cursor: pointer;
 `;
 
 export const IContents = styled.div`

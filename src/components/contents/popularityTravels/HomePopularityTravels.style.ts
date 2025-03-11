@@ -5,6 +5,7 @@ export const HomePopularityTravelsStyle = styled.article`
   flex-direction: column;
   width: 220px;
   height: 320px;
+  cursor: pointer;
 `;
 
 interface ImageProps {

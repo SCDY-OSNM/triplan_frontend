@@ -1,7 +1,50 @@
-import * as S from './Search.style';
+import styled from 'styled-components';
 import { IoMdSearch } from 'react-icons/io';
 import { IoClose } from 'react-icons/io5';
 import React, { useState } from 'react';
+
+export const SearchBox = styled.div`
+  display: flex;
+  align-items: center;
+  width: 570px;
+  height: 55px;
+  border-radius: 30px;
+  background-color: white;
+`;
+
+export const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 20px;
+
+  input {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    background: transparent;
+    flex: 1px;
+    color: ${({ theme }) => theme.color.bkTitle};
+    margin: 5px;
+
+    &::placeholder {
+      color: ${({ theme }) => theme.color.gray};
+    }
+  }
+
+  .search-icon {
+    font-size: 40px;
+    color: ${({ theme }) => theme.color.darkGray};
+  }
+
+  .close-icon {
+    font-size: 40px;
+    color: ${({ theme }) => theme.color.darkGray};
+    cursor: pointer;
+  }
+`;
 
 interface SearchProps {
   onSearchChange?: (search: string) => void;
@@ -24,8 +67,8 @@ const Search = ({ onSearchChange }: SearchProps) => {
   };
 
   return (
-    <S.SearchBox>
-      <S.SearchContainer>
+    <SearchBox>
+      <SearchContainer>
         <IoMdSearch className="search-icon" />
         <input
           type="text"
@@ -36,8 +79,8 @@ const Search = ({ onSearchChange }: SearchProps) => {
           onKeyDown={handleKeyDown}
         />
         {searchText && <IoClose className="close-icon" onClick={handleClear} />}
-      </S.SearchContainer>
-    </S.SearchBox>
+      </SearchContainer>
+    </SearchBox>
   );
 };
 

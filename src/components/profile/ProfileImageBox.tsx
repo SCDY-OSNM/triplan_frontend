@@ -1,6 +1,25 @@
+import styled from 'styled-components';
 import React from 'react';
-import * as S from './ProfileImageBox.style';
 import penguin from './penguin.jpeg';
+
+export const ProfileImageContainer = styled.div<{
+  width: string;
+  height: string;
+}>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  border-radius: 50%;
+`;
+
+export const ProfileImage = styled.img`
+  border-radius: 50%;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+`;
 
 interface ProfileImageBoxProps {
   // src?: string;
@@ -12,9 +31,9 @@ interface ProfileImageBoxProps {
 
 const ProfileImageBox: React.FC<ProfileImageBoxProps> = ({ width, height, className }) => {
   return (
-    <S.ProfileImageContainer className={className} width={width} height={height}>
-      <S.ProfileImage src={penguin} alt="펭귄" />
-    </S.ProfileImageContainer>
+    <ProfileImageContainer className={className} width={width} height={height}>
+      <ProfileImage role="img" alt="프로필이미지" src={penguin} />
+    </ProfileImageContainer>
   );
 };
 

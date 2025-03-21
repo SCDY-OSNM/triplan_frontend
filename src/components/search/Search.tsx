@@ -8,7 +8,7 @@ export const SearchBox = styled.div`
   align-items: center;
   width: 570px;
   height: 55px;
-  border-radius: 30px;
+  border-radius: ${({ theme }) => theme.borderRadius.xxl};
   background-color: white;
 `;
 
@@ -62,6 +62,7 @@ const Search = ({ onSearchChange }: SearchProps) => {
   // 엔터 키 입력 시 검색어 전달
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      e.preventDefault(); // 기본 폼 제출 방지
       onSearchChange(searchText);
     }
   };

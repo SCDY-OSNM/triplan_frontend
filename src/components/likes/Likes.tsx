@@ -12,7 +12,7 @@ export const LikesBtn = styled.button<{
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   background-color: ${({ theme }) => theme.color.heartBg};
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.round};
   border: none;
 `;
 

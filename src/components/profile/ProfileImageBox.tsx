@@ -11,11 +11,11 @@ export const ProfileImageContainer = styled.div<{
   justify-content: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.round};
 `;
 
 export const ProfileImage = styled.img`
-  border-radius: 50%;
+  border-radius: ${({ theme }) => theme.borderRadius.round};
   object-fit: cover;
   width: 100%;
   height: 100%;

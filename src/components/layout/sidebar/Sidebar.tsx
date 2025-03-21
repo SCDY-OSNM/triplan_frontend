@@ -83,7 +83,7 @@ export const CategoryTitle = styled.h2`
 
 export const ContentWrapper = styled.article`
   display: flex;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borderRadius.md};
   background-color: white;
   padding: 20px;
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};

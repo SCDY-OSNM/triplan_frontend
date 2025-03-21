@@ -21,8 +21,11 @@ export type ColorKey =
 
 export type Shadows = string;
 
+export type BorderRadius = string;
+
 interface DefaultTheme {
   color: Record<ColorKey, string>;
+  borderRadius: Record<BorderRadius, string>;
   shadow: Record<Shadows, string>;
 }
 
@@ -47,6 +50,16 @@ export const theme: DefaultTheme = {
     loading: '#D9D9D9',
     star: '#FFC107',
     footer: '#F7F6F6',
+  },
+
+  borderRadius: {
+    xs: '5px',
+    sm: '8px',
+    md: '10px',
+    lg: '15px',
+    xl: '20px',
+    xxl: '30px',
+    round: '50%',
   },
 
   shadow: {

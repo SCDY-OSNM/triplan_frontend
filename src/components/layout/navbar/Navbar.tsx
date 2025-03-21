@@ -42,7 +42,7 @@ export const SidebarBtn = styled.button`
   height: 70px;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   box-shadow: ${({ theme }) => theme.shadow.boxShadow};
   color: ${({ theme }) => theme.color.bkTitle};
   cursor: pointer;

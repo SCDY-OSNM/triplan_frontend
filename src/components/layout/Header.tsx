@@ -9,7 +9,9 @@ import { useEffect, useState, useRef } from 'react';
 import Sidebar from '@/components/layout/sidebar/Sidebar';
 import { IoCartOutline, IoHeartOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 
-const HeaderStyle = styled.header<{ isHome: boolean }>`
+const HeaderStyle = styled.header.withConfig({
+  shouldForwardProp: prop => !['isHome'].includes(prop),
+})<{ isHome: boolean }>`
   display: flex;
   position: fixed;
   width: 100%;
@@ -37,14 +39,16 @@ const LogoSearchWrapper = styled.div`
   gap: 30px;
 `;
 
-const ButtonWrapper = styled.div<{ isHome: boolean }>`
+const ButtonWrapper = styled.div.withConfig({
+  shouldForwardProp: prop => !['isHome'].includes(prop),
+})<{ isHome: boolean }>`
   display: flex;
   // 로그인 했을 경우 justify-content: end, 했을 경우 space-between
   //justify-content: space-between;
   justify-content: end;
   cursor: pointer;
   width: 120px;
-  color: ${({ isHome }) => (isHome ? 'white' : '${({theme}) => theme.color.title}')};
+  color: ${({ isHome, theme }) => (isHome ? 'white' : theme.color.title)};
 `;
 
 // const Button = styled.button`
@@ -76,7 +80,7 @@ export const DropdownWrapper = styled.div<{ $isProfileOpen: boolean }>`
   position: absolute;
   top: 100%;
   background-color: white;
-  border-radius: 8px;
+  border-radius: ${({ theme }) => theme.borderRadius.xs}
   box-shadow: ${({ theme }) => theme.shadow.rb};
   opacity: ${({ $isProfileOpen }) => ($isProfileOpen ? 1 : 0)};
   transform: translateY(${({ $isProfileOpen }) => ($isProfileOpen ? '0' : '-10px')});

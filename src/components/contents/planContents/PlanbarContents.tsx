@@ -1,16 +1,22 @@
 import styled from 'styled-components';
-import { CiSignpostR1 } from 'react-icons/ci';
 
 export const PlanbarContentsStyle = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  cursor: pointer;
+  gap: 10px;
+`;
+
+export const NCWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 20px;
-  cursor: pointer;
 `;
 
-export const NumberBadge = styled.circle`
+export const NumberBadge = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,12 +61,13 @@ export const ContentsWapper = styled.div`
   }
 
   .time {
-    font-size: 11px;
-    font-weight: 400;
+    font-size: 10px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color.darkGray};
   }
 
   .memo {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 400;
     color: ${({ theme }) => theme.color.gray};
   }
@@ -71,17 +78,19 @@ export const ContentsWapper = styled.div`
 const PlanbarContents = ({ onClick }) => {
   return (
     <PlanbarContentsStyle role="button" onClick={onClick}>
-      <NumberBadge>1</NumberBadge>
-      <ContentsWapper>
-        <div>
-          <span className="contentsName">도톤보리</span>
-          <span className="location">관광명소 · 난바</span>
-        </div>
-        <div>
-          <span className="time">12:00 ~ 13:00</span>
-          <span className="memo">메모 어쩌구 저쩌구 블라블라 오코노미야끼가 맛있겠지 야호</span>
-        </div>
-      </ContentsWapper>
+      <NCWrapper>
+        <NumberBadge>1</NumberBadge>
+        <ContentsWapper>
+          <div>
+            <span className="contentsName">도톤보리</span>
+            <span className="location">관광명소 · 난바</span>
+          </div>
+          <div>
+            <span className="time">12:00 ~ 13:00</span>
+            <span className="memo">메모 어쩌구 저쩌구 블라블라 오코노미야끼가 맛있겠지 야호</span>
+          </div>
+        </ContentsWapper>
+      </NCWrapper>
     </PlanbarContentsStyle>
   );
 };

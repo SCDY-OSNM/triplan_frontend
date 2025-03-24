@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Sign from '@/components/contents/sidebarContents/Sign.svg';
+import Sign from '@/components/contents/planContents/Sign.svg';
 
 export const RoadSignWrapper = styled.div`
   position: relative;
@@ -23,7 +23,9 @@ export const RoadSignWrapper = styled.div`
   }
 `;
 
-// 앞 뒤 사이 거리 계산하거나 받아와야함.
+// 놔두는 위치 : 오른쪽 삼각형이 앞뒤 컴포넌트 중간에 위치해야함
+
+// 앞 뒤 사이 거리(직선 or 걷는) 계산하거나 받아와야함.
 
 export function RoadSign() {
   return (

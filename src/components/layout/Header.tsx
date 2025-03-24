@@ -24,11 +24,14 @@ const HeaderStyle = styled.header.withConfig({
   z-index: 50;
 `;
 
-const HeaderWrapper = styled.div`
+const HeaderWrapper = styled.div.withConfig({
+  shouldForwardProp: prop => !['hasMap'].includes(prop),
+})<{ hasMap: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1200px;
+  width: ${({ hasMap }) => (hasMap ? '100%' : '1200px')};
+  padding: ${({ hasMap }) => (hasMap ? '0 30px' : '0')};
   height: 100%;
   cursor: pointer;
 `;
@@ -120,7 +123,7 @@ export const DropdownText = styled.p`
   color: ${({ theme }) => theme.color.title};
 `;
 
-export default function Header({ isHome }) {
+export default function Header({ isHome, hasMap }) {
   const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -180,7 +183,7 @@ export default function Header({ isHome }) {
   return (
     <>
       <HeaderStyle isHome={isHome}>
-        <HeaderWrapper>
+        <HeaderWrapper hasMap={hasMap}>
           {isHome ? (
             <LogoSearchWrapper>
               <img src={Triplan_w} alt="흰색 로고" onClick={() => navigate('/')} />

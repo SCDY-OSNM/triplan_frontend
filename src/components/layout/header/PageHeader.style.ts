@@ -26,10 +26,6 @@ export const PageHeaderWrapper = styled.div<PageHeaderWrapperProps>`
       cursor: pointer;
     }
   }
-
-  .profile {
-    padding-right: 10px;
-  }
 `;
 
 export const SideMenu = styled.div`
@@ -38,7 +34,6 @@ export const SideMenu = styled.div`
   justify-content: center;
   width: 50px;
   height: 50px;
-  padding-left: 10px;
   font-size: 50px;
   color: ${({ theme }) => theme.color.bkTitle};
 `;

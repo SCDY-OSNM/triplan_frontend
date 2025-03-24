@@ -22,15 +22,9 @@ export const HeaderWrapper = styled.div`
   height: 100%;
 
   .logo {
-    padding-left: 10px;
-
     &:hover {
       cursor: pointer;
     }
-  }
-
-  .profile {
-    padding-right: 10px;
   }
 `;
 

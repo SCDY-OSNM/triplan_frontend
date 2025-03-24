@@ -10,8 +10,9 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-        <Layout />
-        <Router />
+        <Layout>
+          <Router />
+        </Layout>
       </ThemeProvider>
     </BrowserRouter>
   );

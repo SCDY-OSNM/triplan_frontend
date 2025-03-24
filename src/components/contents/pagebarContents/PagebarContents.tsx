@@ -78,10 +78,11 @@ export const Image = styled.img`
 // 이미지, 컨텐츠 연결
 // 클릭시 사이드바 옆에 페널 생성해야함
 
-export const PagebarContents = () => {
-  const imgUrl =
-    'https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/04/a0004023/img/basic/a0004023_main.jpg';
+// 임시 이미지
+const imgUrl =
+  'https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/04/a0004023/img/basic/a0004023_main.jpg';
 
+export const PagebarContents = () => {
   return (
     <PagebarContentsStyle role="button">
       <ContentTitle>

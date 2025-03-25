@@ -2,6 +2,7 @@ import * as S from './HomeStayContents.style';
 import Likes from '@/components/likes/Likes';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Stars from '@/components/stars/Stars';
 
 const HomeStayContents = () => {
   const [imgError, setImgError] = useState(false);
@@ -19,7 +20,7 @@ const HomeStayContents = () => {
         const response = await axios.get('');
         setImgUrl(response.data.imageUrl);
       } catch (error) {
-        console.error('이미지 URL을 가져오는 중 오류 발생 Home 숙박:', error);
+        console.error('이미지 URL을 가져오는 중 오류 발생 HomePage 숙박:', error);
       }
     };
 
@@ -54,11 +55,7 @@ const HomeStayContents = () => {
             <S.Dot>·</S.Dot>
             <S.LocationEtc>청포대 해수욕장 차량 3분 (기타 장소?)</S.LocationEtc>
           </S.LocationWrapper>
-          <S.StarWrapper>
-            <S.StarIcon />
-            <S.SRating>4.8 (별점)</S.SRating>
-            <S.SCount>(169) (별점 준 사람 수)</S.SCount>
-          </S.StarWrapper>
+          <Stars />
         </S.TextContent>
         <S.CPWrapper>
           <S.Coupon>쿠폰 적용 시</S.Coupon>

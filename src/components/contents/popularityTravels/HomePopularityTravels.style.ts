@@ -5,6 +5,7 @@ export const HomePopularityTravelsStyle = styled.article`
   flex-direction: column;
   width: 220px;
   height: 320px;
+  cursor: pointer;
 `;
 
 interface ImageProps {
@@ -15,7 +16,7 @@ export const Image = styled.div<ImageProps>`
   position: relative;
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
   background: ${({ imageUrl, theme }) => (imageUrl ? `url(${imageUrl})` : theme.color.loading)};
 
   &::after {
@@ -25,7 +26,7 @@ export const Image = styled.div<ImageProps>`
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 20px;
+    border-radius: ${({ theme }) => theme.borderRadius.xl};
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.1),

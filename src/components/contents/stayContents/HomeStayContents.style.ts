@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { FaStar } from 'react-icons/fa';
 
 export const HomeStayContentsStyle = styled.article`
   display: flex;
   flex-direction: column;
   width: 375px;
   gap: 10px;
+  cursor: pointer;
 `;
 
 export const IContents = styled.div`
@@ -22,7 +22,7 @@ export const Image = styled.img<ImageProps>`
   height: 100%;
   object-fit: ${({ $isDefaultImage }) => ($isDefaultImage ? 'contain' : 'cover')};
   background-color: ${({ theme }) => theme.color.loading};
-  border-radius: 15px;
+  border-radius: ${({ theme }) => theme.borderRadius.lg};
 `;
 
 export const TContents = styled.div`
@@ -85,29 +85,6 @@ export const Location = styled.span`
 export const LocationEtc = styled.div`
   font-size: 15px;
   color: ${({ theme }) => theme.color.gray};
-`;
-
-export const StarWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 2px;
-`;
-
-export const StarIcon = styled(FaStar)`
-  width: 15px;
-  height: 15px;
-  color: ${({ theme }) => theme.color.star};
-`;
-
-export const SRating = styled.span`
-  font-size: 12px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.color.bkTitle};
-`;
-
-export const SCount = styled.span`
-  font-size: 12px;
-  color: ${({ theme }) => theme.color.darkGray};
 `;
 
 export const CPWrapper = styled.div`

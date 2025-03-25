@@ -5,6 +5,7 @@ export const TravelogContentsStyle = styled.article`
   flex-direction: column;
   width: 580px;
   gap: 20px;
+  cursor: pointer;
 `;
 
 export const TopContents = styled.div`
@@ -68,7 +69,7 @@ export const Image = styled.img<ImageProps>`
   height: 100%;
   object-fit: ${({ $isDefaultImage }) => ($isDefaultImage ? 'contain' : 'cover')};
   background-color: ${({ theme }) => theme.color.loading};
-  border-radius: 20px;
+  border-radius: ${({ theme }) => theme.borderRadius.xl};
 `;
 
 export const HTWrapper = styled.div`

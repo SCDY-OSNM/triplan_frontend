@@ -1,25 +1,47 @@
-import * as S from './Layout.style';
+import styled from 'styled-components';
 import React, { ReactNode } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
-import HomeHeader from '@/components/layout/header/HomeHeader';
-import PageHeader from '@/components/layout/header/PageHeader';
+import { useLocation } from 'react-router-dom';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
+
+export const LayoutContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+export const MainStyle = styled.main<{ hasFooter: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-top: 80px; // header 크기
+  padding-bottom: ${({ hasFooter }) => (hasFooter ? '50px' : '0')}; // footer가 있을 경우 필요
+  flex-grow: 1;
+`;
 
 interface LayoutProps {
   children: ReactNode;
 }
 
+// 지도가 포함될 경우 Footer 안보여야함
+// 일정, 내주변, 또 있남
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
-  // map이 있을 경우 true(100%) 없을 경우 false(1200px)
-  const isNarrow = false;
-
   const isHomePage = location.pathname === '/';
 
+  const nearbyPagePath = location.pathname === '/nearby';
+  const planPagePath = location.pathname === '/plan';
+
+  const hasFooter = !nearbyPagePath && !planPagePath;
+
   return (
-    <>
-      <S.Header>{isHomePage ? <HomeHeader /> : <PageHeader isNarrow={isNarrow} />}</S.Header>
-      <S.Main>{children}</S.Main>
-    </>
+    <LayoutContainer>
+      <Header isHome={isHomePage} hasMap={!hasFooter} />
+      <MainStyle hasFooter={hasFooter}>{children}</MainStyle>
+      {hasFooter && <Footer />}
+    </LayoutContainer>
   );
 };
 

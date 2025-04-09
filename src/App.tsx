@@ -4,10 +4,12 @@ import { ThemeProvider } from 'styled-components';
 import { theme } from './styles/theme';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Layout from '@/components/layout/Layout';
+import CustomToastContainer from '@/components/toast/Toast';
 
 function App() {
   return (
     <BrowserRouter>
+      <CustomToastContainer />
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Layout>

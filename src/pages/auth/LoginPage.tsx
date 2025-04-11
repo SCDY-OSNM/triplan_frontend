@@ -1,14 +1,25 @@
 import styled from 'styled-components';
+import React from 'react';
 import Triplan_r from '../../../public/logos/Triplan_r.svg';
 import { useNavigate } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { LoginFormInputs } from '@/interfaces/auth.interfaces';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import Input from '@/components/input/Input';
-import React from 'react';
 import Button from '@/components/button/Button';
-import { Link } from 'react-router-dom';
+import { LoginFormInputs } from '@/interfaces/auth.interfaces';
+import {
+  Contents,
+  ErrorMessage,
+  Form,
+  InputContainer,
+  LinkContainer,
+  LinkStyle,
+  LogoStyle,
+  LogoWrapper,
+  Span,
+  Title,
+} from '@/styles/AuthForm.style';
+import { login } from '@/apis/auth.api';
 
 const LoginPageStyle = styled.div`
   display: flex;
@@ -17,70 +28,6 @@ const LoginPageStyle = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-`;
-
-const LogoWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  padding: 20px;
-`;
-
-const LogoStyle = styled.img`
-  height: 30px;
-  cursor: pointer;
-  align-items: center;
-`;
-
-const Contents = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  gap: 20px;
-  margin-bottom: 70px;
-`;
-
-const Title = styled.h1`
-  font-size: 28px;
-  font-weight: bold;
-`;
-
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  gap: 10px;
-`;
-
-const ErrorMessage = styled.span`
-  color: ${({ theme }) => theme.color.warn};
-  font-size: 12px;
-`;
-
-const LinkContainer = styled.div`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-  color: ${({ theme }) => theme.color.darkGray};
-`;
-
-const Span = styled.span`
-  font-size: 16px;
-`;
-
-const LinkStyle = styled(Link)`
-  color: ${({ theme }) => theme.color.point};
-  font-weight: 500;
-  text-decoration: none;
 `;
 
 export default function LoginPage() {
@@ -93,11 +40,8 @@ export default function LoginPage() {
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_API_HOST}/api/v1/users/login`,
-        data
-      );
-      console.log('응답: ', response.data);
+      const response = await login(data);
+      console.log('응답: ', response);
 
       if (response.data.status === 'success') {
         navigate('/');

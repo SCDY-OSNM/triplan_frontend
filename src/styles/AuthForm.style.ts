@@ -1,19 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const LogoWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  padding: 20px;
-`;
-
-export const LogoStyle = styled.img`
-  height: 30px;
-  cursor: pointer;
-  align-items: center;
-`;
-
 export const Contents = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,7 +8,6 @@ export const Contents = styled.div`
   justify-content: center;
   flex-grow: 1;
   gap: 20px;
-  margin-bottom: 70px;
 `;
 
 export const Title = styled.h1`
@@ -63,4 +49,10 @@ export const LinkStyle = styled(Link)`
   color: ${({ theme }) => theme.color.point};
   font-weight: 500;
   text-decoration: none;
+`;
+
+export const Label = styled.label`
+  font-size: 16px;
+  font-weight: bold;
+  color: ${({ theme }) => theme.color.bkBody};
 `;

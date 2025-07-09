@@ -5,9 +5,9 @@ export interface LoginFormInputs {
 
 export interface SignupFormInputs {
   email: string;
-  password: string;
   nickname: string;
-  userRole?: string;
+  userRole?: 'USER';
   phoneNumber: number;
-  // 실제 이름은 없어도 되는지
+  password: string;
+  confirmPassword: string;
 }

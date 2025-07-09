@@ -9,4 +9,10 @@ const axiosInstance = axios.create({
   // headers: { authorization: `Bearer` },
 });
 
+axiosInstance.interceptors.request.use(config => {
+  const accessToken = sessionStorage.getItem('accessToken');
+  if (config.headers && accessToken) config.headers.Authorization = `Bearer ${accessToken}`;
+  return config;
+});
+
 export default axiosInstance;

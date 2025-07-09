@@ -1,6 +1,105 @@
-import styled from 'styled-components';
-import React from 'react';
-import Triplan_r from '../../../public/logos/Triplan_r.svg';
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router';
+// import { SubmitHandler, useForm } from 'react-hook-form';
+// import { toast } from 'react-toastify';
+// import Input from '@/components/input/Input';
+// import Button from '@/components/button/Button';
+// import { LoginFormInputs } from '@/interfaces/auth.interfaces';
+// import {
+//   Contents,
+//   ErrorMessage,
+//   Form,
+//   InputContainer,
+//   LinkContainer,
+//   LinkStyle,
+//   Span,
+//   Title,
+// } from '@/styles/AuthForm.style';
+// import { login } from '@/apis/auth.api';
+// import { useSetAtom } from 'jotai';
+// import { authAtom } from '@/atoms/auth';
+
+// export default function LoginPage() {
+//   const {
+//     register,
+//     handleSubmit,
+//     formState: { errors },
+//   } = useForm<LoginFormInputs>();
+//   const navigate = useNavigate();
+
+//   // 인증 상태 업데이트
+//   const setAuth = useSetAtom(authAtom);
+//   // 로딩상태
+//   const [isLoading, setIsLoading] = useState(false);
+
+//   const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
+//     setIsLoading(true);
+//     try {
+//       // login 함수 호출 및 응답
+//       const loginResponse = await login(data);
+
+//       // login 함수에서 반환된 accessToken, user 정보 업데이트
+//       setAuth({
+//         isAuthenticated: true,
+//         user: loginResponse.user || null,
+//         accessToken: loginResponse.accessToken,
+//         isLoading: false,
+//         error: null,
+//       });
+
+//       // 로그인 성공 시 토스트 메시지 표시
+//       toast.success('로그인 성공');
+//       navigate('/');
+//     } catch (error) {
+//       console.error('로그인 처리중 에러 발생:', error);
+//       const errorMessage = error.message || '로그인에 실패했습니다.';
+//       toast.error(errorMessage);
+//       // toast.error('로그인 실패');
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+
+//   return (
+//     <Contents>
+//       <Title>로그인</Title>
+//       <Form onSubmit={handleSubmit(onSubmit)}>
+//         <InputContainer>
+//           <Input
+//             hasError={!!errors.email}
+//             type="email"
+//             placeholder="이메일을 입력하세요"
+//             {...register('email', {
+//               required: '이메일을 입력하세요.',
+//             })}
+//           />
+//           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+
+//           <Input
+//             hasError={!!errors.password}
+//             type="password"
+//             placeholder="비밀번호를 입력하세요"
+//             {...register('password', {
+//               required: '비밀번호를 입력하세요.',
+//             })}
+//           />
+//           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+
+//           {/* 로딩 상태에 따라 버튼 비활성화 */}
+//           <Button type="submit" size="large" disabled={isLoading}>
+//             로그인
+//           </Button>
+//           <LinkContainer>
+//             <Span>아직 회원이 아니신가요?</Span>
+//             <LinkStyle to={'/signup'}>회원가입</LinkStyle>
+//           </LinkContainer>
+//         </InputContainer>
+//       </Form>
+//     </Contents>
+//   );
+// }
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
@@ -14,21 +113,10 @@ import {
   InputContainer,
   LinkContainer,
   LinkStyle,
-  LogoStyle,
-  LogoWrapper,
   Span,
   Title,
 } from '@/styles/AuthForm.style';
 import { login } from '@/apis/auth.api';
-
-const LoginPageStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100vw;
-`;
 
 export default function LoginPage() {
   const {
@@ -38,65 +126,58 @@ export default function LoginPage() {
   } = useForm<LoginFormInputs>();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
-    try {
-      const response = await login(data);
-      console.log('응답: ', response);
+  // 로딩상태
+  const [isLoading, setIsLoading] = useState(false);
 
-      if (response.data.status === 'success') {
-        navigate('/');
-        if (location.pathname === '/') {
-          toast.success('로그인 성공');
-        }
-      }
+  const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
+    setIsLoading(true);
+    try {
+      await login(data);
+      toast.success('로그인 성공');
+      navigate('/');
     } catch (error) {
-      console.error('에러 발생:', error);
-      if (error.response) {
-        toast.error('로그인 실패');
-        console.log('서버 응답:', error.response.data);
-        console.log(`로그인에 실패했습니다: ${error.response.data.message}`);
-      }
+      console.error('로그인 처리중 에러 발생:', error);
+      toast.error('로그인 실패');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <LoginPageStyle>
-      <LogoWrapper>
-        <LogoStyle src={Triplan_r} alt="rgb 로고" onClick={() => navigate('/')} />
-      </LogoWrapper>
-      <Contents>
-        <Title>로그인</Title>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-          <InputContainer>
-            <Input
-              hasError={!!errors.email}
-              type="email"
-              placeholder="이메일을 입력하세요"
-              {...register('email', {
-                required: '이메일을 입력하세요.',
-              })}
-            />
-            {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+    <Contents>
+      <Title>로그인</Title>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <InputContainer>
+          <Input
+            hasError={!!errors.email}
+            type="email"
+            placeholder="이메일을 입력하세요"
+            {...register('email', {
+              required: '이메일을 입력하세요.',
+            })}
+          />
+          {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
 
-            <Input
-              hasError={!!errors.password}
-              type="password"
-              placeholder="비밀번호를 입력하세요"
-              {...register('password', {
-                required: '비밀번호를 입력하세요.',
-              })}
-            />
-            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-            <Button type="submit" size="large">
-              로그인
-            </Button>
-            <LinkContainer>
-              <Span>아직 회원이 아니신가요?</Span>
-              <LinkStyle to={'/signup'}>회원가입</LinkStyle>
-            </LinkContainer>
-          </InputContainer>
-        </Form>
-      </Contents>
-    </LoginPageStyle>
+          <Input
+            hasError={!!errors.password}
+            type="password"
+            placeholder="비밀번호를 입력하세요"
+            {...register('password', {
+              required: '비밀번호를 입력하세요.',
+            })}
+          />
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+
+          {/* 로딩 상태에 따라 버튼 비활성화 */}
+          <Button type="submit" size="large" disabled={isLoading}>
+            로그인
+          </Button>
+          <LinkContainer>
+            <Span>아직 회원이 아니신가요?</Span>
+            <LinkStyle to={'/signup'}>회원가입</LinkStyle>
+          </LinkContainer>
+        </InputContainer>
+      </Form>
+    </Contents>
   );
 }

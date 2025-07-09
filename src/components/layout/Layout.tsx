@@ -39,12 +39,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const planPagePath = location.pathname === '/plan';
 
   // 로그인 및 회원가입 페이지에서는 헤더와 푸터가 없음
+  const isLogSignPage = loginPath || signupPath;
   const hasHeader = !(loginPath || signupPath);
   const hasFooter = !(nearbyPagePath || planPagePath || loginPath || signupPath);
 
   return (
     <LayoutContainer>
-      {hasHeader && <Header isHome={isHomePage} hasMap={!hasFooter} />}
+      <Header isHome={isHomePage} hasMap={!hasFooter} isLogSign={isLogSignPage} />
       <MainStyle hasHeader={hasHeader} hasFooter={hasFooter}>
         {children}
       </MainStyle>

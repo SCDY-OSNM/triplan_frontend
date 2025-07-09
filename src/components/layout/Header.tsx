@@ -10,8 +10,8 @@ import Sidebar from '@/components/layout/sidebar/Sidebar';
 import { IoCartOutline, IoHeartOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 
 const HeaderStyle = styled.header.withConfig({
-  shouldForwardProp: prop => !['isHome'].includes(prop),
-})<{ isHome: boolean }>`
+  shouldForwardProp: prop => !['isHome', 'isLogSign'].includes(prop),
+})<{ isHome: boolean; isLogSign: boolean }>`
   display: flex;
   position: fixed;
   width: 100%;
@@ -20,7 +20,7 @@ const HeaderStyle = styled.header.withConfig({
   justify-content: center;
   background: ${({ isHome, theme }) =>
     isHome ? `linear-gradient(to right, ${theme.color.rgb1}, ${theme.color.rgb2})` : 'white'};
-  box-shadow: ${({ theme }) => theme.shadow.bottom};
+  box-shadow: ${({ isLogSign, theme }) => (isLogSign ? 'none' : theme.shadow.bottom)};
   z-index: 50;
 `;
 
@@ -83,7 +83,7 @@ export const DropdownWrapper = styled.div<{ $isProfileOpen: boolean }>`
   position: absolute;
   top: 100%;
   background-color: white;
-  border-radius: ${({ theme }) => theme.borderRadius.xs}
+  border-radius: ${({ theme }) => theme.borderRadius.xs};
   box-shadow: ${({ theme }) => theme.shadow.rb};
   opacity: ${({ $isProfileOpen }) => ($isProfileOpen ? 1 : 0)};
   transform: translateY(${({ $isProfileOpen }) => ($isProfileOpen ? '0' : '-10px')});
@@ -99,7 +99,8 @@ export const UserInfo = styled.div`
   align-items: center;
   gap: 12px;
   padding: 14px 20px;
-  border-bottom: 1px solid lightgray;
+  // padding 이랑 갭을 같이 줄꺼면 magin으로 수정 필요
+  border-bottom: 1px solid lightgray; // lightgray -> theme 파일에 넣어버리기
   width: 100%;
 `;
 
@@ -123,7 +124,7 @@ export const DropdownText = styled.p`
   color: ${({ theme }) => theme.color.title};
 `;
 
-export default function Header({ isHome, hasMap }) {
+export default function Header({ isHome, hasMap, isLogSign }) {
   const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -182,9 +183,17 @@ export default function Header({ isHome, hasMap }) {
 
   return (
     <>
-      <HeaderStyle isHome={isHome}>
+      <HeaderStyle isHome={isHome} isLogSign={isLogSign}>
         <HeaderWrapper hasMap={hasMap}>
-          {isHome ? (
+          {isLogSign ? (
+            // 로그인 및 회원가입 페이지일 때 로고만 표시
+            <img
+              src={Triplan_r}
+              alt="rgb 로고"
+              onClick={() => navigate('/')}
+              style={{ marginLeft: '20px', height: '30px' }}
+            />
+          ) : isHome ? (
             <LogoSearchWrapper>
               <img src={Triplan_w} alt="흰색 로고" onClick={() => navigate('/')} />
               <Search />
@@ -204,12 +213,20 @@ export default function Header({ isHome, hasMap }) {
           )}
           <ButtonWrapper isHome={isHome}>
             {/* 로그인 O 프로필 이미지 가져오기 */}
-            <>
-              <ProfileImgWrapper ref={profileRef} onClick={toggleDropdown}>
-                {renderProfileImage()}
-              </ProfileImgWrapper>
-              {renderDropdown()}
-            </>
+            {/*<>*/}
+            {/*  <ProfileImgWrapper ref={profileRef} onClick={toggleDropdown}>*/}
+            {/*    {renderProfileImage()}*/}
+            {/*  </ProfileImgWrapper>*/}
+            {/*  {renderDropdown()}*/}
+            {/*</>*/}
+            {!isLogSign && (
+              <>
+                <ProfileImgWrapper ref={profileRef} onClick={toggleDropdown}>
+                  {renderProfileImage()}
+                </ProfileImgWrapper>
+                {renderDropdown()}
+              </>
+            )}
 
             {/* 로그인 X 경우 */}
             {/*<Button onClick={() => navigate('/login')}>로그인</Button>*/}

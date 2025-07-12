@@ -10,12 +10,14 @@ export const LayoutContainer = styled.div`
   min-height: 100vh;
 `;
 
-export const MainStyle = styled.main<{ hasFooter: boolean }>`
+export const MainStyle = styled.main.withConfig({
+  shouldForwardProp: prop => !['hasHeader', 'hasFooter'].includes(prop),
+})<{ hasFooter: boolean; hasHeader: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding-top: 80px; // header 크기
+  padding-top: ${({ hasHeader }) => (hasHeader ? '80px' : '0')}; // header 크기
   padding-bottom: ${({ hasFooter }) => (hasFooter ? '50px' : '0')}; // footer가 있을 경우 필요
   flex-grow: 1;
 `;
@@ -31,16 +33,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
 
+  const loginPath = location.pathname === '/login';
+  const signupPath = location.pathname === '/signup';
   const nearbyPagePath = location.pathname === '/nearby';
   const planPagePath = location.pathname === '/plan';
 
-  const hasFooter = !nearbyPagePath && !planPagePath;
+  // 로그인 및 회원가입 페이지에서는 헤더와 푸터가 없음
+  const isLogSignPage = loginPath || signupPath;
+  const hasHeader = !(loginPath || signupPath);
+  const hasFooter = !(nearbyPagePath || planPagePath || loginPath || signupPath);
 
   return (
     <LayoutContainer>
-      <Header isHome={isHomePage} hasMap={!hasFooter} />
-      <MainStyle hasFooter={hasFooter}>{children}</MainStyle>
-      {hasFooter && <Footer />}
+      <Header isHome={isHomePage} hasMap={!hasFooter} isLogSign={isLogSignPage} />
+      <MainStyle hasHeader={hasHeader} hasFooter={hasFooter}>
+        {children}
+      </MainStyle>
+      {hasHeader && hasFooter && <Footer />}
     </LayoutContainer>
   );
 };

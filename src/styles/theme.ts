@@ -17,7 +17,8 @@ export type ColorKey =
   | 'orange'
   | 'loading'
   | 'star'
-  | 'footer';
+  | 'footer'
+  | 'warn';
 
 export type Shadows = string;
 
@@ -50,6 +51,7 @@ export const theme: DefaultTheme = {
     loading: '#D9D9D9',
     star: '#FFC107',
     footer: '#F7F6F6',
+    warn: '#FA6554',
   },
 
   borderRadius: {

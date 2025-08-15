@@ -56,8 +56,6 @@ export const logout = async () => {
     const errorMessage =
       error.response?.data?.message || '알 수 없는 로그아웃 오류가 발생했습니다.';
     throw new Error(errorMessage);
-  } finally {
-    sessionStorage.removeItem('accessToken');
   }
 };
 

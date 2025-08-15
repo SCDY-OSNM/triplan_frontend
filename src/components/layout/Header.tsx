@@ -149,7 +149,7 @@ export default function Header({ isHome, hasMap, isLogSign }) {
   const isLoggedIn = useAtomValue(isLoggedInAtom);
   const user = useAtomValue(userAtom);
   const setToken = useSetAtom(tokenAtom);
-  const setUser = useSetAtom(tokenAtom);
+  const setUser = useSetAtom(userAtom);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -210,7 +210,7 @@ export default function Header({ isHome, hasMap, isLogSign }) {
         <DropdownItems onClick={() => navigate('/cart')}>
           <IoCartOutline /> 장바구니
         </DropdownItems>
-        <DropdownItems onClick={() => navigate('/profile')}>
+        <DropdownItems onClick={() => navigate('/mypage')}>
           <IoSettingsOutline /> 프로필 수정
         </DropdownItems>
         <DropdownItems onClick={handleLogout}>

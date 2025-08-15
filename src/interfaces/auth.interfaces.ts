@@ -18,3 +18,9 @@ export interface User {
   userRole: 'ADMIN' | 'USER';
   phoneNumber: string;
 }
+
+export interface UpdateMyInfoPayload {
+  nickname: string;
+  phoneNumber: string;
+  password: string;
+}

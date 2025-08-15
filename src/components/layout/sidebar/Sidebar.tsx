@@ -18,8 +18,7 @@ export const SidebarStyle = styled.aside`
   left: 0;
   width: 400px;
   height: 100%;
-  background-color: #f7f8fb;
-  //background-color: white;
+  background-color: ${({ theme }) => theme.color.swhite};
   z-index: 1000;
 `;
 

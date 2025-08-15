@@ -7,7 +7,14 @@ export interface SignupFormInputs {
   email: string;
   nickname: string;
   userRole?: 'USER';
-  phoneNumber: number;
+  phoneNumber: string;
   password: string;
   confirmPassword: string;
+}
+
+export interface User {
+  email: string;
+  nickname: string;
+  userRole: 'ADMIN' | 'USER';
+  phoneNumber: string;
 }

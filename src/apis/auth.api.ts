@@ -1,39 +1,49 @@
-import { LoginFormInputs, SignupFormInputs } from '@/interfaces/auth.interfaces';
+import { LoginFormInputs, SignupFormInputs, User } from '@/interfaces/auth.interfaces';
 import axiosInstance from '@/apis/axiosInstance.api';
 import { API_ROUTES } from '@/apis/apiRoutes';
 import { toast } from 'react-toastify';
 
 // 로그인
-export const login = async (data: LoginFormInputs) => {
+export const login = async (data: LoginFormInputs): Promise<{ accessToken: string }> => {
   try {
     const response = await axiosInstance.post(API_ROUTES.LOGIN, data);
-    console.log('로그인 응답:', response);
 
-    // accessToken이랑 user 정보 받아서 저장
+    console.log('----- 로그인 API 응답 -----');
+    console.log('로그인 응답:', response);
+    console.log('응답 데이터 (response.data): ', response.data);
+
     const accessToken = response.data.data;
     console.log('accessToken: ', accessToken);
 
-    // 수정해야함
-    const user = response.data;
-
-    // 로그인시, user 정보도 받아와야하는거 백엔드에 요청하기
-    // accessToken data말고 accessToken으로 이름 바꿔달라고 요청하기
-
     if (accessToken) {
-      // 세션 저장
-      sessionStorage.setItem('accessToken', accessToken);
-      // 성공 시 응답 객체 반환
-      return {
-        accessToken,
-        user,
-      };
+      return { accessToken };
     } else {
-      throw new Error('로그인 성공 응답에 accessToken이 없습니다.');
+      throw new Error('로그인 인증 토큰을 받지 못했습니다.');
     }
   } catch (error) {
-    console.error('로그인 API 호출 에러 발생:', error);
+    console.error('로그인 API 호출 에러 발생: ', error);
     const errorMessage = error.response?.data?.message || '알 수 없는 로그인 오류가 발생했습니다.';
     throw new Error(errorMessage);
+  }
+};
+
+// 내 정보 조회
+export const getMyInfo = async (token?: string): Promise<User> => {
+  try {
+    const response = await axiosInstance.get(API_ROUTES.MY_INFO, {
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+
+    console.log('----- 내 정보 API 응답 -----');
+    console.log('전체 응답 객체 : ', response);
+    console.log('응답 데이터 (response.data): ', response.data);
+
+    console.log('응답 데이터 response.data.data: ', response.data.data);
+
+    return response.data.data;
+  } catch (error) {
+    console.error('내 정보 조회 API 호출 에러 발생: ', error);
+    throw new Error('사용자 정보를 가져오는데 실패했습니다.');
   }
 };
 

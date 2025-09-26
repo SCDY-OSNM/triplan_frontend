@@ -13,12 +13,7 @@ export const login = async (data: LoginFormInputs): Promise<{ accessToken: strin
   try {
     const response = await axiosInstance.post(API_ROUTES.LOGIN, data);
 
-    console.log('----- 로그인 API 응답 -----');
-    console.log('로그인 응답:', response);
-    console.log('응답 데이터 (response.data): ', response.data);
-
     const accessToken = response.data.data;
-    console.log('accessToken: ', accessToken);
 
     if (accessToken) {
       return { accessToken };
@@ -33,17 +28,9 @@ export const login = async (data: LoginFormInputs): Promise<{ accessToken: strin
 };
 
 // 내 정보 조회
-export const getMyInfo = async (token?: string): Promise<User> => {
+export const getMyInfo = async (): Promise<User> => {
   try {
-    const response = await axiosInstance.get(API_ROUTES.MY_INFO, {
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-    });
-
-    console.log('----- 내 정보 API 응답 -----');
-    console.log('전체 응답 객체 : ', response);
-    console.log('응답 데이터 (response.data): ', response.data);
-
-    console.log('응답 데이터 response.data.data: ', response.data.data);
+    const response = await axiosInstance.get(API_ROUTES.MY_INFO);
 
     return response.data.data;
   } catch (error) {
@@ -68,7 +55,6 @@ export const logout = async () => {
 export const signUp = async (data: SignupFormInputs) => {
   try {
     const response = await axiosInstance.post(API_ROUTES.SIGNUP, data);
-    console.log('회원가입 응답:', response);
 
     return response;
   } catch (error) {
@@ -84,12 +70,6 @@ export const signUp = async (data: SignupFormInputs) => {
 export const patchMyInfo = async (data: UpdateMyInfoPayload): Promise<User> => {
   try {
     const response = await axiosInstance.patch(API_ROUTES.MY_INFO, data);
-
-    console.log('----- 내 정보 수정 API 응답 -----');
-    console.log('전체 응답 객체 : ', response);
-    console.log('응답 데이터 (response.data): ', response.data);
-
-    console.log('응답 데이터 response.data.data: ', response.data.data);
 
     return response.data.data;
   } catch (error) {

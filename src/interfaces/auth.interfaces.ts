@@ -3,6 +3,11 @@ export interface LoginFormInputs {
   password: string;
 }
 
+export enum ROLE {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
 export interface SignupFormInputs {
   email: string;
   nickname: string;
@@ -15,7 +20,7 @@ export interface SignupFormInputs {
 export interface User {
   email: string;
   nickname: string;
-  userRole: 'ADMIN' | 'USER';
+  userRole: ROLE;
   phoneNumber: string;
 }
 

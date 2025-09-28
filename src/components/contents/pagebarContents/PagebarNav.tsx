@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 const PagebarNavStyle = styled.nav`
@@ -17,16 +18,16 @@ const NavBtn = styled.button`
   padding: 5px;
   cursor: pointer;
 
-  border-radius: ${({ theme }) => theme.borderRadius.xxl};
+  border-radius: ${theme.borderRadius.xxl};
   //버튼 선택이 된 경우
   border: 1px solid transparent;
   background:
     linear-gradient(white, white) padding-box,
-    ${({ theme }) => `linear-gradient(to right, ${theme.color.rgb1}, ${theme.color.rgb2})`}
+    ${`linear-gradient(to right, ${theme.color.rgb1}, ${theme.color.rgb2})`}
       border-box;
 
   span {
-    color: ${({ theme }) => theme.color.bkTitle};
+    color: ${theme.color.bkTitle};
     font-size: 14px;
     font-weight: 500;
   }

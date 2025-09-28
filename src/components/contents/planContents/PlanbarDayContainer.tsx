@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
+import { theme } from '@/styles/theme';
 
 const DayContainerStyle = styled.div`
   display: flex;
@@ -17,7 +18,7 @@ const DayCountBtn = styled.button`
   .dayCount {
     font-size: 16px;
     font-weight: 500;
-    color: ${({ theme }) => theme.color.bkTitle};
+    color: ${theme.color.bkTitle};
   }
 `;
 

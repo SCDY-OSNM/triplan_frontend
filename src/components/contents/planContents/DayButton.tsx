@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 const DayButtonStyle = styled.button`
@@ -6,14 +7,14 @@ const DayButtonStyle = styled.button`
   height: 35px;
   align-items: center;
   justify-content: center;
-  border-radius: ${({ theme }) => theme.borderRadius.xxl};
+  border-radius: ${theme.borderRadius.xxl};
   // 선택 되었을 경우 배경 색상
-  background-color: ${({ theme }) => theme.color.point};
+  background-color: ${theme.color.point};
 
   // 선택 X 벼튼 스타일
   // background-color: white;
   // border-style: solid;
-  // border-color: ${({ theme }) => theme.color.line};
+  // border-color: ${theme.color.line};
 
   span {
     font-size: 13px;
@@ -22,7 +23,7 @@ const DayButtonStyle = styled.button`
     color: white;
 
     // 비선택시 폰트 스타일
-    //color: ${({ theme }) => theme.color.gray};
+    //color: ${theme.color.gray};
   }
 `;
 

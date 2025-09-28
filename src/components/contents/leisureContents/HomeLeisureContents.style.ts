@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from '@/styles/theme';
 
 export const HomeLeisureContentsStyle = styled.article`
   display: flex;
@@ -21,8 +22,8 @@ export const Image = styled.img<ImageProps>`
   width: 100%;
   height: 100%;
   object-fit: ${({ $isDefaultImage }) => ($isDefaultImage ? 'contain' : 'cover')};
-  background-color: ${({ theme }) => theme.color.loading};
-  border-radius: ${({ theme }) => theme.borderRadius.xl};
+  background-color: ${theme.color.loading};
+  border-radius: ${theme.borderRadius.xl};
 `;
 
 export const TContents = styled.div`
@@ -53,17 +54,17 @@ export const LocationWrapper = styled.div`
 
 export const Location = styled.span`
   font-size: 20px;
-  color: ${({ theme }) => theme.color.darkGray};
+  color: ${theme.color.darkGray};
 `;
 
 export const Dot = styled.span`
   font-size: 20px;
-  color: ${({ theme }) => theme.color.darkGray};
+  color: ${theme.color.darkGray};
 `;
 
 export const LocationEtc = styled.span`
   font-size: 20px;
-  color: ${({ theme }) => theme.color.darkGray};
+  color: ${theme.color.darkGray};
 `;
 
 export const Title = styled.h3`
@@ -79,7 +80,7 @@ export const Title = styled.h3`
 export const PriceWrapper = styled.div`
   display: flex;
   align-items: end;
-  color: ${({ theme }) => theme.color.bkTitle};
+  color: ${theme.color.bkTitle};
   gap: 10px;
   // 무료 && 매진일 경우
   // color: transparent;
@@ -90,7 +91,7 @@ export const DiscountRate = styled.span`
   flex-direction: row;
   font-size: 20px;
   font-weight: 550;
-  color: ${({ theme }) => theme.color.point};
+  color: ${theme.color.point};
   // 무료 && 매진일 경우
   // color: transparent;
 

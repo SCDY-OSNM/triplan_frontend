@@ -9,6 +9,7 @@ import FormInput from '@/components/input/FormInput';
 import { UpdateMyInfoPayload } from '@/interfaces/auth.interfaces';
 import { theme } from '@/styles/theme';
 
+
 const ProfileSection = styled.div`
   display: flex;
   flex-direction: column;

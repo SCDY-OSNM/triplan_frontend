@@ -1,3 +1,4 @@
+import { theme } from '@/styles/theme';
 import styled from 'styled-components';
 
 export const PlanbarContentsStyle = styled.article`
@@ -22,12 +23,12 @@ export const NumberBadge = styled.div`
   justify-content: center;
   width: 25px;
   height: 25px;
-  border-radius: ${({ theme }) => theme.borderRadius.round};
-  background-color: ${({ theme }) => theme.color.yellow};
+  border-radius: ${theme.borderRadius.round};
+  background-color: ${theme.color.yellow};
 
   font-size: 12px;
   font-weight: bold;
-  color: ${({ theme }) => theme.color.heartBg};
+  color: ${theme.color.heartBg};
 `;
 
 export const ContentsWapper = styled.div`
@@ -36,8 +37,8 @@ export const ContentsWapper = styled.div`
   justify-content: center;
   width: 85%;
   padding: 15px 17px;
-  border-radius: ${({ theme }) => theme.borderRadius.xs};
-  box-shadow: ${({ theme }) => theme.shadow.boxShadow};
+  border-radius: ${theme.borderRadius.xs};
+  box-shadow: ${theme.shadow.boxShadow};
   gap: 10px;
 
   div {
@@ -49,27 +50,27 @@ export const ContentsWapper = styled.div`
   .contentsName {
     font-size: 18px;
     font-weight: 600;
-    color: ${({ theme }) => theme.color.bkTitle};
+    color: ${theme.color.bkTitle};
     word-break: break-all;
   }
 
   .location {
     font-size: 14px;
     font-weight: 400;
-    color: ${({ theme }) => theme.color.gray};
+    color: ${theme.color.gray};
     word-break: break-all;
   }
 
   .time {
     font-size: 10px;
     font-weight: 500;
-    color: ${({ theme }) => theme.color.darkGray};
+    color: ${theme.color.darkGray};
   }
 
   .memo {
     font-size: 10px;
     font-weight: 400;
-    color: ${({ theme }) => theme.color.gray};
+    color: ${theme.color.gray};
   }
 `;
 

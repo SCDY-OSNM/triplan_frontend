@@ -1,25 +1,12 @@
-import { useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useAtom } from 'jotai';
-import { userAtom } from '@/atoms/auth.atom';
-import { toast } from 'react-toastify';
 import styled from 'styled-components';
-
-import {
-  Contents,
-  Title,
-  Form,
-  InputContainer,
-  Label,
-  ErrorMessage,
-} from '@/styles/AuthForm.style';
+import { Contents, Title, Form, InputContainer, Label } from '@/styles/AuthForm.style';
 import Input from '@/components/input/Input';
 import Button from '@/components/button/Button';
 import ProfileImageBox from '@/components/profile/ProfileImageBox';
 import { FaCamera } from 'react-icons/fa';
-import { patchMyInfo } from '@/apis/auth.api';
+import { useMy } from '@/hook/useMy';
+import FormInput from '@/components/input/FormInput';
 import { UpdateMyInfoPayload } from '@/interfaces/auth.interfaces';
-import { useNavigate } from 'react-router';
 
 const ProfileSection = styled.div`
   display: flex;
@@ -59,46 +46,8 @@ const EditButton = styled.div`
   }
 `;
 
-type MypageFormInputs = UpdateMyInfoPayload;
-
 export default function Mypage() {
-  const [user, setUser] = useAtom(userAtom);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isDirty, isValid },
-    reset,
-  } = useForm<MypageFormInputs>({ mode: 'onChange' });
-
-  const navigate = useNavigate();
-
-  // user 정보가 Jotai에 로드시 폼의 기본값 설정
-  useEffect(() => {
-    if (user) {
-      reset({
-        nickname: user.nickname,
-        phoneNumber: user.phoneNumber,
-        password: '',
-      });
-    }
-  }, [user, reset]);
-
-  const onSubmit: SubmitHandler<MypageFormInputs> = async data => {
-    try {
-      const updatedUser = await patchMyInfo(data);
-      setUser(updatedUser);
-
-      reset({ ...data, password: '' });
-
-      toast.success('프로필이 성공적으로 수정되었습니다.');
-
-      // 수정 완료시 일단 메인화면으로 이동
-      navigate('/');
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : '프로필 수정에 실패했습니다.');
-    }
-  };
+  const { user, register, handleSubmit, errors, isDirty, isValid } = useMy();
 
   // Jotai에서 user 정보를 불러오지 못했을 경우
   if (!user) {
@@ -112,7 +61,7 @@ export default function Mypage() {
   return (
     <Contents>
       <Title>프로필 수정</Title>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit}>
         <ProfileSection>
           <ProfileImageWrapper>
             <ProfileImageBox width="120px" height="120px" />
@@ -133,52 +82,47 @@ export default function Mypage() {
             />
           </InputContainer>
 
-          <InputContainer>
-            <Label>닉네임</Label>
-            <Input
-              hasError={!!errors.nickname}
-              type="text"
-              {...register('nickname', {
-                required: '닉네임을 입력하세요.',
-                pattern: {
-                  value: /^[a-zA-Z가-힣0-9]{2,8}$/,
-                  message: '닉네임은 영어, 한글, 숫자로 구성된 2~8글자여야 합니다.',
-                },
-              })}
-            />
-            {errors.nickname && <ErrorMessage>{errors.nickname.message}</ErrorMessage>}
-          </InputContainer>
+          <FormInput<UpdateMyInfoPayload>
+            label="닉네임"
+            name="nickname"
+            register={register}
+            errors={errors}
+            rules={{
+              required: '닉네임을 입력하세요.',
+              pattern: {
+                value: /^[a-zA-Z가-힣0-9]{2,8}$/,
+                message: '닉네임은 영어, 한글, 숫자로 구성된 2~8글자여야 합니다.',
+              },
+            }}
+          />
 
-          {/* 백엔드 수정되면 전화번호도 바뀔 듯 */}
-          <InputContainer>
-            <Label>전화번호</Label>
-            <Input
-              hasError={!!errors.phoneNumber}
-              type="tel"
-              {...register('phoneNumber', {
-                required: '전화번호를 입력하세요.',
-                pattern: {
-                  value: /^[0-9]{11}$/,
-                  message: '전화번호는 01012341234 형식의 11자리 숫자여야 합니다.',
-                },
-              })}
-            />
-            {errors.phoneNumber && <ErrorMessage>{errors.phoneNumber.message}</ErrorMessage>}
-          </InputContainer>
+          <FormInput<UpdateMyInfoPayload>
+            label="전화번호"
+            name="phoneNumber"
+            type="tel"
+            register={register}
+            errors={errors}
+            rules={{
+              required: '전화번호를 입력하세요.',
+              pattern: {
+                value: /^[0-9]{11}$/,
+                message: '전화번호는 01012341234 형식의 11자리 숫자여야 합니다.',
+              },
+            }}
+          />
 
           {/* 백엔드에서 비밀번호 일치하는지 확인하는거 필요할듯 그냥 비밀번호가 바로 바뀜 */}
-          <InputContainer>
-            <Label>비밀번호</Label>
-            <Input
-              hasError={!!errors.password}
-              type="password"
-              placeholder="정보를 수정하려면 현재 비밀번호를 입력하세요."
-              {...register('password', {
-                required: '정보를 수정하려면 비밀번호를 입력해야 합니다.',
-              })}
-            />
-            {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-          </InputContainer>
+          <FormInput<UpdateMyInfoPayload>
+            label="비밀번호"
+            name="password"
+            type="password"
+            placeholder="정보를 수정하려면 현재 비밀번호를 입력하세요."
+            register={register}
+            errors={errors}
+            rules={{
+              required: '정보를 수정하려면 비밀번호를 입력해야 합니다.',
+            }}
+          />
 
           <Button type="submit" size="large" disabled={!isDirty || !isValid}>
             수정하기

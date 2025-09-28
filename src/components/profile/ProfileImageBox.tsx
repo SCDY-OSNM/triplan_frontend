@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import penguin from './penguin.jpeg';
+import { theme } from '@/styles/theme';
 
 export const ProfileImageContainer = styled.div<{
   width: string;
@@ -11,19 +12,17 @@ export const ProfileImageContainer = styled.div<{
   justify-content: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  border-radius: ${({ theme }) => theme.borderRadius.round};
+  border-radius: ${theme.borderRadius.round};
 `;
 
 export const ProfileImage = styled.img`
-  border-radius: ${({ theme }) => theme.borderRadius.round};
+  border-radius: ${theme.borderRadius.round};
   object-fit: cover;
   width: 100%;
   height: 100%;
 `;
 
 interface ProfileImageBoxProps {
-  // src?: string;
-  // alt?: string;
   width: string;
   height: string;
   className?: string;

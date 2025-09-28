@@ -8,6 +8,10 @@ import { IoIosCalendar, IoMdMenu } from 'react-icons/io';
 import { useEffect, useState, useRef } from 'react';
 import Sidebar from '@/components/layout/sidebar/Sidebar';
 import { IoCartOutline, IoHeartOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
+import { useAtomValue, useSetAtom } from 'jotai';
+import { isLoggedInAtom, tokenAtom, userAtom } from '@/atoms/auth.atom';
+import { logout } from '@/apis/auth.api';
+import { toast } from 'react-toastify';
 
 const HeaderStyle = styled.header.withConfig({
   shouldForwardProp: prop => !['isHome', 'isLogSign'].includes(prop),
@@ -54,10 +58,21 @@ const ButtonWrapper = styled.div.withConfig({
   color: ${({ isHome, theme }) => (isHome ? 'white' : theme.color.title)};
 `;
 
-// const Button = styled.button`
-//   font-size: 16px;
-//   font-weight: 500;
-// `;
+const AuthButtonWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const AuthButton = styled.button`
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+`;
 
 const SideMenuBtn = styled.button`
   display: flex;
@@ -114,7 +129,7 @@ export const DropdownItems = styled.div`
   color: ${({ theme }) => theme.color.bkBody};
 
   &:hover {
-    background-color: #f4f4f4;
+    background-color: ${({ theme }) => theme.color.hwhite};
   }
 `;
 
@@ -130,6 +145,11 @@ export default function Header({ isHome, hasMap, isLogSign }) {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const profileRef = useRef<HTMLDivElement | null>(null);
+
+  const isLoggedIn = useAtomValue(isLoggedInAtom);
+  const user = useAtomValue(userAtom);
+  const setToken = useSetAtom(tokenAtom);
+  const setUser = useSetAtom(userAtom);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -151,6 +171,25 @@ export default function Header({ isHome, hasMap, isLogSign }) {
 
   const toggleDropdown = () => setIsProfileOpen(prev => !prev);
 
+  // --- 로그아웃 ---
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setToken(null);
+      setUser(null);
+      setIsProfileOpen(false);
+
+      // 로그아웃 시 일단 메인페이지로 이동
+      navigate('/');
+      toast.success('성공적으로 로그아웃 되었습니다.');
+    } catch (error) {
+      console.log('로그아웃 실패: ', error);
+
+      setToken(null);
+      setUser(null);
+    }
+  };
+
   const renderProfileImage = () => {
     return <ProfileImageBox className="profile" width="42px" height="42px" />;
   };
@@ -160,7 +199,7 @@ export default function Header({ isHome, hasMap, isLogSign }) {
       <DropdownWrapper ref={dropdownRef} $isProfileOpen={isProfileOpen}>
         <UserInfo>
           <ProfileImageBox width="32px" height="32px" />
-          <DropdownText>선찌 님</DropdownText>
+          <DropdownText>{user ? `${user.nickname}님` : '사용자님'}</DropdownText>
         </UserInfo>
         <DropdownItems onClick={() => navigate('/myplan')}>
           <IoIosCalendar /> 내 일정
@@ -171,10 +210,10 @@ export default function Header({ isHome, hasMap, isLogSign }) {
         <DropdownItems onClick={() => navigate('/cart')}>
           <IoCartOutline /> 장바구니
         </DropdownItems>
-        <DropdownItems onClick={() => navigate('/profile')}>
+        <DropdownItems onClick={() => navigate('/mypage')}>
           <IoSettingsOutline /> 프로필 수정
         </DropdownItems>
-        <DropdownItems>
+        <DropdownItems onClick={handleLogout}>
           <IoLogOutOutline /> 로그아웃
         </DropdownItems>
       </DropdownWrapper>
@@ -207,30 +246,29 @@ export default function Header({ isHome, hasMap, isLogSign }) {
                 src={Triplan_r}
                 alt="rgb 로고"
                 onClick={() => navigate('/')}
-                style={{ marginLeft: '78px' }}
+                style={{ marginLeft: '78px', cursor: 'pointer' }}
               />
             </>
           )}
+          {/*---- 로그인 상태에 따른 조건부 랜더링 -----*/}
           <ButtonWrapper isHome={isHome}>
-            {/* 로그인 O 프로필 이미지 가져오기 */}
-            {/*<>*/}
-            {/*  <ProfileImgWrapper ref={profileRef} onClick={toggleDropdown}>*/}
-            {/*    {renderProfileImage()}*/}
-            {/*  </ProfileImgWrapper>*/}
-            {/*  {renderDropdown()}*/}
-            {/*</>*/}
-            {!isLogSign && (
+            {isLoggedIn ? (
+              // 로그인 상태일 때 : 프로필 이미지와 드롭다운 표시
               <>
                 <ProfileImgWrapper ref={profileRef} onClick={toggleDropdown}>
                   {renderProfileImage()}
                 </ProfileImgWrapper>
                 {renderDropdown()}
               </>
+            ) : (
+              // 로그아웃 상태일 떄 : 로그인/회원가입 버튼 표시 (로그인/회원가입 페이지 아닐 경우만)
+              !isLogSign && (
+                <AuthButtonWrapper>
+                  <AuthButton onClick={() => navigate('/login')}>로그인</AuthButton>
+                  <AuthButton onClick={() => navigate('/signup')}>회원가입</AuthButton>
+                </AuthButtonWrapper>
+              )
             )}
-
-            {/* 로그인 X 경우 */}
-            {/*<Button onClick={() => navigate('/login')}>로그인</Button>*/}
-            {/*<Button onClick={() => navigate('/signup')}>회원가입</Button>*/}
           </ButtonWrapper>
         </HeaderWrapper>
       </HeaderStyle>

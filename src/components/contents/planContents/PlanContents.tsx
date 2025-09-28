@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Stars from '@/components/stars/Stars';
+import { theme } from '@/styles/theme';
 
 const PlanContentsStyle = styled.article`
   display: flex;
@@ -10,7 +11,7 @@ const Image = styled.img`
   width: 72px;
   height: 96px;
   object-fit: cover;
-  border-radius: ${({ theme }) => theme.borderRadius.xs};
+  border-radius: ${theme.borderRadius.xs};
 `;
 
 const TextWrapper = styled.div`
@@ -22,17 +23,17 @@ const TextWrapper = styled.div`
   .title {
     font-size: 18px;
     font-weight: 600;
-    color: ${({ theme }) => theme.color.bkTitle};
+    color: ${theme.color.bkTitle};
   }
 
   .summary {
     font-size: 12px;
-    color: ${({ theme }) => theme.color.darkGray};
+    color: ${theme.color.darkGray};
   }
 
   .location {
     font-size: 12px;
-    color: ${({ theme }) => theme.color.gray};
+    color: ${theme.color.gray};
   }
 `;
 

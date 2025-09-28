@@ -18,7 +18,9 @@ export type ColorKey =
   | 'loading'
   | 'star'
   | 'footer'
-  | 'warn';
+  | 'warn'
+  | 'hwhite'
+  | 'swhite';
 
 export type Shadows = string;
 
@@ -52,6 +54,8 @@ export const theme: DefaultTheme = {
     star: '#FFC107',
     footer: '#F7F6F6',
     warn: '#FA6554',
+    hwhite: '#f4f4f4',
+    swhite: '#f8f7fb',
   },
 
   borderRadius: {

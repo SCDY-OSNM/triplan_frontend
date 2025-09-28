@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import Likes from '@/components/likes/Likes';
 import Stars from '@/components/stars/Stars';
 import { GoHeartFill } from 'react-icons/go';
+import { theme } from '@/styles/theme';
 
 export const PagebarContentsStyle = styled.article`
   display: flex;
@@ -18,13 +19,13 @@ export const ContentTitle = styled.h2`
   font-size: 20px;
   font-weight: bold;
   align-items: flex-end;
-  color: ${({ theme }) => theme.color.title};
+  color: ${theme.color.title};
 
   .type {
     font-size: 16px;
     font-weight: normal;
     margin-left: 5px;
-    color: ${({ theme }) => theme.color.darkGray};
+    color: ${theme.color.darkGray};
   }
 
   .like_btn {
@@ -51,7 +52,7 @@ export const StarHeartWrapper = styled.div`
   font-size: 12px;
   gap: 2px;
   span {
-    color: ${({ theme }) => theme.color.bkTitle};
+    color: ${theme.color.bkTitle};
   }
 
   .line {
@@ -60,7 +61,7 @@ export const StarHeartWrapper = styled.div`
 `;
 
 export const HeartIcon = styled(GoHeartFill)`
-  color: ${({ theme }) => theme.color.heartR};
+  color: ${theme.color.heartR};
 `;
 
 export const PhotoWrapper = styled.div`
@@ -72,7 +73,7 @@ export const Image = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: ${({ theme }) => theme.borderRadius.md};
+    border-radius: ${theme.borderRadius.md};
 `;
 
 // 이미지, 컨텐츠 연결

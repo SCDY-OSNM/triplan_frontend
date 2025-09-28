@@ -5,10 +5,12 @@ import { theme } from './styles/theme';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Layout from '@/components/layout/Layout';
 import CustomToastContainer from '@/components/toast/Toast';
+import AuthLoader from './components/auth/AuthLoader';
 
 function App() {
   return (
     <BrowserRouter>
+      <AuthLoader />
       <CustomToastContainer />
       <ThemeProvider theme={theme}>
         <GlobalStyles />

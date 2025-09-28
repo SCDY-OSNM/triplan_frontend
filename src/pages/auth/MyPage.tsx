@@ -7,6 +7,7 @@ import { FaCamera } from 'react-icons/fa';
 import { useMy } from '@/hook/useMy';
 import FormInput from '@/components/input/FormInput';
 import { UpdateMyInfoPayload } from '@/interfaces/auth.interfaces';
+import { theme } from '@/styles/theme';
 
 const ProfileSection = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const EditButton = styled.div`
   justify-content: center;
   width: 36px;
   height: 36px;
-  background-color: ${({ theme }) => theme.color.point};
+  background-color: ${theme.color.point};
   color: white;
   border-radius: 50%;
   border: 2px solid white;
@@ -78,7 +79,7 @@ export default function Mypage() {
               type="email"
               defaultValue={user.email}
               disabled
-              style={{ backgroundColor: '#f2f2f2', cursor: 'not-allowed' }}
+              style={{ backgroundColor: theme.color.hwhite, cursor: 'not-allowed' }}
             />
           </InputContainer>
 
